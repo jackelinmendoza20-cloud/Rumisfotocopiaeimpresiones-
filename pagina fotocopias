@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rumis - Fotocopias, Impresiones, Stickers & Fotos Eco</title>
+  <style>
+    :root {
+      --primary-color: #2d5a27;
+      --secondary-color: #4a7c59;
+      --accent-color: #8bbf69;
+      --earth-color: #6c584c;
+      --bg-color: #f4f8f4;
+      --card-bg: #ffffff;
+      --border-color: #c8e6c9;
+      --warning-bg: #fff8e1;
+      --warning-border: #ffe082;
+      --warning-text: #7f5f00;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: #2b3a2a;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(45, 90, 39, 0.08);
+      border: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    header {
+      text-align: center;
+      border-bottom: 2px dashed var(--border-color);
+      padding-bottom: 25px;
+      margin-bottom: 25px;
+    }
+
+    .eco-badge {
+      display: inline-block;
+      background-color: #e8f5e9;
+      color: var(--primary-color);
+      font-size: 0.9rem;
+      font-weight: bold;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    header h1 {
+      margin: 5px 0 10px 0;
+      color: var(--primary-color);
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-subtitle {
+      display: inline-block;
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      color: var(--primary-color);
+      font-size: 1.25rem;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 12px;
+      margin-top: 5px;
+      box-shadow: 0 2px 8px rgba(45, 90, 39, 0.06);
+    }
+
+    header p {
+      color: var(--earth-color);
+      margin-top: 12px;
+      font-size: 1rem;
+    }
+
+    /* Sección Ilustrada de Servicios */
+    .services-illustrations {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .service-card-eco {
+      background: #fafdfa;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 18px 15px;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .service-card-eco:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(45, 90, 39, 0.08);
+      background-color: #f0f7f1;
+    }
+
+    .service-card-eco .icon {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+
+    .service-card-eco h3 {
+      margin: 0 0 4px 0;
+      color: var(--primary-color);
+      font-size: 1.05rem;
+    }
+
+    .service-card-eco p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--earth-color);
+    }
+
+    /* Notice Banner (Pago Previo) */
+    .policy-banner {
+      background-color: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .policy-banner .icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .policy-banner-content h4 {
+      margin: 0 0 4px 0;
+      color: var(--warning-text);
+      font-size: 1rem;
+    }
+
+    .policy-banner-content p {
+      margin: 0;
+      color: #614a00;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      color: var(--primary-color);
+      margin-bottom: 14px;
+      border-left: 4px solid var(--secondary-color);
+      padding-left: 10px;
+      font-weight: bold;
+    }
+
+    /* Área Drag & Drop */
+    .drop-zone {
+      border: 2px dashed var(--secondary-color);
+      border-radius: 14px;
+      padding: 30px;
+      text-align: center;
+      background-color: #f0f7f1;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 25px;
+    }
+
+    .drop-zone:hover {
+      background-color: #e2f0e4;
+      border-color: var(--primary-color);
+    }
+
+    .drop-zone input[type="file"] {
+      display: none;
+    }
+
+    .drop-icon {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+
+    /* Opciones de Servicio */
+    .grid-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+      color: var(--primary-color);
+    }
+
+    .form-group select, .form-group input {
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #fafdfa;
+      color: #2b3a2a;
+      outline: none;
+    }
+
+    .form-group select:focus, .form-group input:focus {
+      border-color: var(--secondary-color);
+      box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.2);
+    }
+
+    /* Medios de Pago y Alias */
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #fafdfa;
+      transition: background 0.2s ease;
+    }
+
+    .payment-option:hover {
+      background-color: #edf7ee;
+    }
+
+    .payment-option input {
+      margin-right: 12px;
+      accent-color: var(--primary-color);
+    }
+
+    .alias-box {
+      background-color: #e8f5e9;
+      border: 1px dashed var(--secondary-color);
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: var(--primary-color);
+      display: none;
+    }
+
+    .alias-box strong {
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      background: #ffffff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Resumen de Cotización */
+    .summary-card {
+      background-color: #e8f5e9;
+      padding: 18px 22px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      border: 1px solid var(--border-color);
+    }
+
+    .summary-card span {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .summary-card .total-price {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    /* Botón Principal Eco */
+    .btn-submit {
+      width: 100%;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 16px;
+      font-size: 1.15rem;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.1s ease;
+      box-shadow: 0 4px 12px rgba(45, 90, 39, 0.2);
+    }
+
+    .btn-submit:hover {
+      background-color: #23471f;
+    }
+
+    .btn-submit:active {
+      transform: scale(0.99);
+    }
+
+    /* Pie de Página (Footer Verificado) */
+    footer {
+      margin-top: 35px;
+      border-top: 2px dashed var(--border-color);
+      padding-top: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--earth-color);
+    }
+
+    footer p {
+      margin: 4px 0;
+    }
+
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <span class="eco-badge">🌱 Impresión Sustentable & Local</span>
+    <h1>Rumis</h1>
+    <div class="hero-subtitle">Fotocopias, Impresiones, Stickers & Fotos</div>
+    <p>Subí tus archivos, cotizá al instante y realizá tu pedido online desde Rosario</p>
+  </header>
+
+  <!-- Ilustraciones de Servicios Eco -->
+  <div class="services-illustrations">
+    <div class="service-card-eco">
+      <div class="icon">📄🌿</div>
+      <h3>Fotocopias & Apuntes</h3>
+      <p>Papel Normal A4 y Ecológico</p>
+    </div>
+    <div class="service-card-eco">
+      <div class="icon">🏷️✨</div>
+      <h3>Stickers Adhesivos</h3>
+      <p>Planchas personalizadas ($1000)</p>
+    </div>
+    <div class="service-card-eco">
+      <div class="icon">🖼️📸</div>
+      <h3>Impresión de Fotos</h3>
+      <p>Calidad fotográfica alta ($900)</p>
+    </div>
+  </div>
+
+  <!-- Banner Comercial de Pago Previo -->
+  <div class="policy-banner">
+    <div class="icon">💡</div>
+    <div class="policy-banner-content">
+      <h4>Modalidad de Procesamiento de Pedidos</h4>
+      <p>Para cuidar los insumos, evitar demoras y tener tu pedido listo al instante cuando pases a buscarlo, <strong>todos los trabajos se imprimen únicamente previo pago confirmado</strong> (vía Mercado Pago o transferencia). ¡Así agilizamos la atención de todos!</p>
+    </div>
+  </div>
+
+  <!-- 1. Carga de Archivos -->
+  <div class="section-title">1. Subir Documentos o Imágenes</div>
+  <div class="drop-zone" onclick="document.getElementById('file-input').click()">
+    <div class="drop-icon">📄🌱</div>
+    <p>Arrastrá y soltá tus archivos acá o <strong>hacé clic para seleccionar</strong></p>
+    <small>(Formatos aceptados: PDF, JPG, PNG)</small>
+    <input type="file" id="file-input" multiple onchange="mostrarArchivos(this.files)">
+    <div id="file-list" style="margin-top: 10px; font-weight: bold; color: var(--primary-color);"></div>
+  </div>
+
+  <!-- 2. Configuración del Servicio -->
+  <div class="section-title">2. Opciones del Pedido</div>
+  <div class="grid-options">
+    <div class="form-group">
+      <label for="tipo-servicio">Tipo de Trabajo</label>
+      <select id="tipo-servicio" onchange="actualizarTiposPapel(); calcularTotal();">
+        <option value="fotocopia">Fotocopias / Impresiones Generales</option>
+        <option value="fotos">Impresión de Fotos ($900 c/u)</option>
+        <option value="stickers">Stickers Adhesivos ($1000 la plancha)</option>
+        <option value="tarjetas">Tarjetería / Eventos</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="tipo-papel">Tipo de Papel</label>
+      <select id="tipo-papel" onchange="calcularTotal()">
+        <option value="normal">Papel Normal A4</option>
+        <option value="ecologico" selected>Papel Ecológico 🌱 ($150 B&N / $250 Color)</option>
+        <option value="opalina">Papel Opalina ($500 c/u)</option>
+        <option value="adhesivo">Papel Adhesivo / Sticker ($1000 la plancha)</option>
+        <option value="fotografico">Papel Fotográfico ($900 c/u)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="tipo-color">Impresión</label>
+      <select id="tipo-color" onchange="calcularTotal()">
+        <option value="bn">Blanco y Negro</option>
+        <option value="color">Color</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cantidad">Cantidad (Hojas / Unidades / Planchas)</label>
+      <input type="number" id="cantidad" value="1" min="1" oninput="calcularTotal()">
+    </div>
+
+    <div class="form-group">
+      <label for="acabado">Acabado Extra</label>
+      <select id="acabado" onchange="calcularTotal()">
+        <option value="ninguno">Sin acabado extra</option>
+        <option value="plastificado">Plastificado / Laminado</option>
+        <option value="anillado" disabled>Anillado (Por el momento no se realizan)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- 3. Datos del Cliente -->
+  <div class="section-title">3. Datos de Contacto</div>
+  <div class="grid-options">
+    <div class="form-group">
+      <label for="nombre-cliente">Nombre Completo</label>
+      <input type="text" id="nombre-cliente" placeholder="Tu nombre">
+    </div>
+    <div class="form-group">
+      <label for="telefono-cliente">Teléfono / WhatsApp</label>
+      <input type="tel" id="telefono-cliente" placeholder="341-XXXXXXX">
+    </div>
+  </div>
+
+  <!-- 4. Formas de Pago -->
+  <div class="section-title">4. Forma de Pago</div>
+  <div class="payment-methods">
+    <label class="payment-option">
+      <input type="radio" name="pago" value="tarjeta" checked onchange="toggleAliasBox()">
+      💳 Mercado Pago / Transferencia (Pago previo requerido)
+    </label>
+    <div id="alias-box" class="alias-box" style="display: block;">
+      📌 Alias de Mercado Pago: <strong>jackicosme94</strong>
+    </div>
+
+    <label class="payment-option">
+      <input type="radio" name="pago" value="efectivo" onchange="toggleAliasBox()">
+      💵 Pago presencial anticipado en el local
+    </label>
+  </div>
+
+  <!-- Resumen de Pago -->
+  <div class="summary-card">
+    <span>Total Estimado:</span>
+    <span class="total-price" id="total-display">$150.00</span>
+  </div>
+
+  <!-- Confirmación de Pedido -->
+  <button class="btn-submit" onclick="enviarPedido()">Confirmar y Enviar Pedido por WhatsApp 📲</button>
+
+  <!-- Footer con Verificación de Negocio Real -->
+  <footer>
+    <div class="verified-badge">✔ Comercio Verificado - Rumis fotocopias e impresiones</div>
+    <p>📍 <strong>Dirección:</strong> Tarragona 465, Fisherton, Rosario, Santa Fe</p>
+    <p>✉️ <strong>Correo electrónico:</strong> Jackelinmendoza20@gmail.com | 📲 <strong>WhatsApp:</strong> 341-6190861</p>
+  </footer>
+</div>
+
+<script>
+  let nombresArchivos = "Sin archivos adjuntos";
+
+  function mostrarArchivos(files) {
+    const fileList = document.getElementById('file-list');
+    if (files.length > 0) {
+      const listaNombres = Array.from(files).map(f => f.name).join(', ');
+      fileList.textContent = `Archivos seleccionados: ${files.length} (${listaNombres})`;
+      nombresArchivos = listaNombres;
+    }
+  }
+
+  function toggleAliasBox() {
+    const medioPago = document.querySelector('input[name="pago"]:checked').value;
+    const aliasBox = document.getElementById('alias-box');
+    if (medioPago === 'tarjeta') {
+      aliasBox.style.display = 'block';
+    } else {
+      aliasBox.style.display = 'none';
+    }
+  }
+
+  function actualizarTiposPapel() {
+    const servicio = document.getElementById('tipo-servicio').value;
+    const selectPapel = document.getElementById('tipo-papel');
+
+    if (servicio === 'fotos') {
+      selectPapel.value = 'fotografico';
+    } else if (servicio === 'stickers') {
+      selectPapel.value = 'adhesivo';
+    } else if (servicio === 'tarjetas') {
+      selectPapel.value = 'opalina';
+    }
+  }
+
+  function calcularTotal() {
+    const servicio = document.getElementById('tipo-servicio').value;
+    const papel = document.getElementById('tipo-papel').value;
+    const color = document.getElementById('tipo-color').value;
+    const cantidad = parseInt(document.getElementById('cantidad').value) || 1;
+    const acabado = document.getElementById('acabado').value;
+
+    let precioBase = 150;
+
+    if (papel === 'ecologico') {
+      precioBase = (color === 'color') ? 250 : 150;
+    } else if (papel === 'fotografico' || servicio === 'fotos') {
+      precioBase = 900;
+    } else if (papel === 'adhesivo' || servicio === 'stickers') {
+      precioBase = 1000;
+    } else if (papel === 'opalina' || servicio === 'tarjetas') {
+      precioBase = 500;
+    } else if (papel === 'normal') {
+      precioBase = (color === 'color') ? 225 : 150;
+    }
+
+    let subtotal = precioBase * cantidad;
+
+    if (acabado === 'plastificado') subtotal += 300 * cantidad;
+
+    document.getElementById('total-display').textContent = `$${subtotal.toFixed(2)}`;
+  }
+
+  calcularTotal();
+
+  function enviarPedido() {
+    const nombre = document.getElementById('nombre-cliente').value.trim();
+    const telefono = document.getElementById('telefono-cliente').value.trim();
+
+    if (!nombre || !telefono) {
+      alert("Por favor ingresá tu nombre y teléfono de contacto para continuar.");
+      return;
+    }
+
+    const servicio = document.getElementById('tipo-servicio').options[document.getElementById('tipo-servicio').selectedIndex].text;
+    const papel = document.getElementById('tipo-papel').options[document.getElementById('tipo-papel').selectedIndex].text;
+    const color = document.getElementById('tipo-color').options[document.getElementById('tipo-color').selectedIndex].text;
+    const cantidad = document.getElementById('cantidad').value;
+    const acabado = document.getElementById('acabado').options[document.getElementById('acabado').selectedIndex].text;
+    const medioPago = document.querySelector('input[name="pago"]:checked').value === 'tarjeta' ? 'Mercado Pago (Alias: jackicosme94)' : 'Efectivo en local (Previo)';
+    const total = document.getElementById('total-display').textContent;
+
+    const mensaje = `¡Hola Rumis! Quiero realizar un pedido:%0A%0A` +
+      `👤 *Cliente:* ${nombre}%0A` +
+      `📞 *Contacto:* ${telefono}%0A` +
+      `📁 *Archivos:* ${nombresArchivos}%0A` +
+      `🛠️ *Trabajo:* ${servicio}%0A` +
+      `🌱 *Papel:* ${papel}%0A` +
+      `🎨 *Impresión:* ${color}%0A` +
+      `🔢 *Cantidad:* ${cantidad}%0A` +
+      `✨ *Acabado:* ${acabado}%0A` +
+      `💳 *Medio de Pago:* ${medioPago}%0A` +
+      `💰 *Total Estimado:* ${total}%0A%0A` +
+      `Quedo a la espera del comprobante de pago para procesar la impresión. ¡Muchas gracias!`;
+
+    const urlWhatsApp = `https://wa.me/5493416190861?text=${mensaje}`;
+    window.open(urlWhatsApp, '_blank');
+  }
+</script>
+
+</body>
+</html>
